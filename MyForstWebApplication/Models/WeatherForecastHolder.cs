@@ -58,7 +58,7 @@ namespace MyForstWebApplication.Models
         /// <returns>Коллекция показателей температуры</returns>
         public List<WeatherForecast> Get(DateTime dateFrom, DateTime dateTo)
         {
-            List<WeatherForecast> list = new List<WeatherForecast>();
+            List<WeatherForecast> list = new List<WeatherForecast>();//В этот лист пишутся все показатели температуры за период
             foreach (WeatherForecast item in _values)
             {
                 if (item.Date >= dateFrom && item.Date <= dateTo)
@@ -74,6 +74,14 @@ namespace MyForstWebApplication.Models
         /// <returns>Результат выполнения операции</returns>
         public bool Delete(DateTime date)
         {
+            foreach (WeatherForecast item in _values)
+            {
+                if (item.Date == date)
+                {
+                    _values.Remove(item);
+                    return true;
+                }
+            }
             return false;
         }
     }
